@@ -1,17 +1,17 @@
-import React from "react";
-import "./index.scss";
-import { Link } from "react-router-dom";
+import React from 'react'
+import './index.scss'
+import { Link } from 'react-router-dom'
 
 interface SidebarProps {}
 
 const Sidebar = (props: SidebarProps) => {
-  const [isOpen, toggle] = React.useState<boolean>(false);
+  const [isOpen, toggle] = React.useState<boolean>(false)
 
-  const sidebarClassname = isOpen ? "sidebar" : "sidebar sidebar__hidden";
+  const sidebarClassname = isOpen ? 'sidebar' : 'sidebar sidebar__hidden'
 
   const onSidebarButtonClick = () => {
-    toggle(!isOpen);
-  };
+    toggle(!isOpen)
+  }
 
   return (
     <div>
@@ -70,18 +70,14 @@ const Sidebar = (props: SidebarProps) => {
             <div className="span-button" onClick={onSidebarButtonClick}>
               <span className="text-muted small">Toggle</span>
               <span className="ml-2">
-                {isOpen ? (
-                  <i className="fas fa-toggle-on"></i>
-                ) : (
-                  <i className="fas fa-toggle-off"></i>
-                )}
+                {isOpen ? <i className="fas fa-toggle-on"></i> : <i className="fas fa-toggle-off"></i>}
               </span>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
