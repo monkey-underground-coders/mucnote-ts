@@ -1,0 +1,46 @@
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.span-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: sfprodisplay;
+  src: url("./assets/sfprodisplay/sfprodisplay/SFProDisplay-Regular.woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: sfprodisplay;
+  src: url("./assets/sfprodisplay/sfprodisplay/SFProDisplay-Medium.woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: sfprodisplay;
+  src: url("./assets/sfprodisplay/sfprodisplay/SFProDisplay-Bold.woff");
+  font-weight: 700;
+}
+
+body {
+  margin: 0;
+  font-family: "sfprodisplay";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
