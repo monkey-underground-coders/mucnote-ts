@@ -19,7 +19,7 @@ const MainScene = (props: MainSceneProps) => {
           <div className="notelist">{notesToRender}</div>
         </div>
         <div className="content__modal">
-          <CreateNoteModal />
+          <div><CreateNoteModal /></div>
         </div>
       </div>
     </div>

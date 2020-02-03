@@ -1,0 +1,11 @@
+.modal__form {
+  width: 100%;
+  min-height: 98vh;
+  border-top: 5px black solid;
+  &__button {
+    font-size: 1.5rem;
+    text-align: left;
+    background-color: green;
+    margin-right: 1.5rem;
+  }
+}
