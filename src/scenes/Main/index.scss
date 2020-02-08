@@ -1,11 +1,13 @@
 .content {
   border: solid 5px black;
   display: flex;
-  &__modal {
+
+  &__note {
     text-align: center;
     width: 100%;
     border-left: 5px solid black;
   }
+
   &__list {
     width: 250px;
   }

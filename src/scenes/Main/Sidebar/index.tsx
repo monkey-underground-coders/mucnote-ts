@@ -6,12 +6,9 @@ interface SidebarProps {}
 
 const Sidebar = (props: SidebarProps) => {
   const [isOpen, toggle] = React.useState<boolean>(false)
-
   const sidebarClassname = isOpen ? 'sidebar' : 'sidebar sidebar__hidden'
 
-  const onSidebarButtonClick = () => {
-    toggle(!isOpen)
-  }
+  const toggleSidebar = () => toggle(!isOpen)
 
   return (
     <div className={sidebarClassname}>
@@ -66,7 +63,7 @@ const Sidebar = (props: SidebarProps) => {
         </div>
 
         <div className="sidebar-footer text-center">
-          <div className="span-button" onClick={onSidebarButtonClick}>
+          <div className="span-button" onClick={toggleSidebar}>
             <span className="text-muted small">Toggle</span>
             <span className="ml-2">
               {isOpen ? <i className="fas fa-toggle-on"></i> : <i className="fas fa-toggle-off"></i>}
