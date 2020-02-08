@@ -39,8 +39,12 @@ a:hover {
 
 body {
   margin: 0;
-  max-height: 100vh;
+  height: 100%;
   font-family: 'sfprodisplay', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root, .main {
+  height: 100%;
 }

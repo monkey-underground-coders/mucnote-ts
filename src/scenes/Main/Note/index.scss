@@ -1,12 +1,18 @@
-.modal__form {
+.create__note {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  min-height: 98vh;
-  border-top: 5px black solid;
+  height: 100%;
 
-  &__button {
-    font-size: 1.5rem;
-    text-align: left;
-    background-color: green;
-    margin-right: 1.5rem;
+  &__actions {
+    padding: 1rem;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  &__content {
+    flex: 1 1;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
   }
 }

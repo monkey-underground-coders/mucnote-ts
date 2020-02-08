@@ -14,25 +14,52 @@ interface NoteProps {
 }
 
 const Note = (props: NoteProps) => {
-  const md = new Remarkable({ breaks: true })
-  const onEditClick = () => {
-    props.changeEditMode()
+  const ref = React.useRef(null)
+
+  const [innerText, setInnerText] = React.useState<string>('')
+  const [innerHTML, setInnerHTML] = React.useState<string>('')
+  const [previewMode, setPreviewMode] = React.useState<boolean>(false)
+
+  const markdown = new Remarkable({ breaks: true })
+
+  const togglePreview = () => {
+    const target = ref.current as any
+    if (!previewMode) {
+      setInnerText(target.innerText)
+      setInnerHTML(target.innerHTML)
+    }
+    setPreviewMode(!previewMode)
   }
+
+  React.useLayoutEffect(() => {
+    const target = ref.current as any
+    if (target) {
+      target.innerHTML = innerHTML
+    }
+  }, [previewMode])
+
   return (
-    <div className="form">
-      <div className="modal__form__button btn">
-        <span>
-          <i className="far fa-save"></i>
-        </span>
-        <span>Save</span>
+    <div className="create__note">
+      <div className="create__note__actions">
+        <div className="btn btn-success">
+          <span>
+            <i className="fas fa-check"></i>
+          </span>
+          <span className="ml-1">Save</span>
+        </div>
+        <div className="btn btn-primary ml-2" onClick={togglePreview}>
+          <span>
+            <i className="fas fa-eye"></i>
+          </span>
+          <span className="ml-1">{previewMode ? 'Close preview' : 'Watch preview'}</span>
+        </div>
       </div>
-      <div className="modal__form__button btn" onClick={onEditClick}>
-        <span>
-          <i className="far fa-edit"></i>
-        </span>
-        <span>Edit</span>
-      </div>
-      <div className="modal__form" contentEditable={true}></div>
+
+      {previewMode ? (
+        <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
+      ) : (
+        <div className="create__note__content" contentEditable={true} ref={ref}></div>
+      )}
     </div>
   )
 }

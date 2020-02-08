@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import Note from './Note'
-import NoteList from './NoteList'
+import NoteList from '#/components/NoteList'
 import './index.scss'
 
 interface MainSceneProps {}
