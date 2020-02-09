@@ -1,3 +1,7 @@
+export interface Action {
+  type: string
+}
+
 export interface StoreRootState {
   note: NoteState
 }
