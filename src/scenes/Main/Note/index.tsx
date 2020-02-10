@@ -1,19 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeEditMode, createCategory } from '#/store/actions/note'
+import { changeEditMode, saveNoteText, createCategory  } from '#/store/actions/note'
+import { NoteState } from "../../../store/types"
 import './index.scss'
 import { Category } from '#/store/types'
 
 /**
  * I don't know any reason why this one doesn't work with ES6 import style,
  * maybe it's caused by inappropriate versions of module and timport { Category } from './../../../store/types';
-ypings for the module.
+ypings for the module.import { saveNoteText } from './../../../store/actions/note';
+
  */
 const Remarkable = require('remarkable').Remarkable
 
 interface NoteProps {
   changeEditMode: () => void,
   createCategory: (payload: {category: Category}) => Promise<any>
+  saveNoteText: (payload: { noteContent: NoteState }) => void
 }
 
 const Note = (props: NoteProps) => {
@@ -41,7 +44,11 @@ const Note = (props: NoteProps) => {
     if (target) {
       target.innerHTML = innerHTML
     }
-  }, [previewMode])
+  }, [previewMode, innerHTML])
+
+  const SaveNote = () => {
+    props.saveNoteText({ noteContent: { editMode: previewMode, innerText: innerText, innerHTML: innerHTML } })
+  }
 
   return (
     <div className="create__note">
@@ -63,10 +70,10 @@ const Note = (props: NoteProps) => {
       {previewMode ? (
         <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
       ) : (
-        <div className="create__note__content" contentEditable={true} ref={ref}></div>
-      )}
+          <div className="create__note__content" contentEditable={true} ref={ref}></div>
+        )}
     </div>
   )
 }
 
-export default connect(null, { changeEditMode, createCategory })(Note)
+export default connect(null, { changeEditMode, createCategory, saveNoteText})(Note)

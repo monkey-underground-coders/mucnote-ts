@@ -4,7 +4,7 @@ import { noteReducer } from './note'
 
 export const rootLevelReducer = (state: StoreRootState, action: Action) => {
   const topLevelReducer = combineReducers({
-    note: noteReducer
+    note: noteReducer,
   })
 
   return topLevelReducer(state as any, action)

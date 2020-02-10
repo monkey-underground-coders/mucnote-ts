@@ -3,7 +3,8 @@ export interface Action {
 }
 
 export interface StoreRootState {
-  note: NoteState
+  note: NoteState,
+  save: NoteState
 }
 export interface Action {
   type: string
@@ -31,3 +32,8 @@ export interface Category {
 
 export type NotesCategorized = Record<PrimaryKey, Note[]>
 export type CategoryOptions = Record<PrimaryKey, Category>
+
+
+export interface Action {
+  action: string
+}
