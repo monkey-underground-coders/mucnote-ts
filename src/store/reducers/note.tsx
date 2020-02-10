@@ -6,23 +6,24 @@ import { createReducer } from '../helpers'
 const initialState: NoteState = {
   editMode: false,
   categories: [],
-  options: [],
+  options: []
 }
 
-export const noteReducer = (state: NoteState, action: Action) => ({
-  [ActionTypes.NOTE.CHANGE_EDIT_MODE]: (state: NoteState, action: any) => ({
-    ...state,
-    editMode: !state.editMode
-  }),
-  [ActionTypes.NOTE.SAVE_NOTE_TEXT]: (state: NoteState, action: any) => ({
-    ...state,
-    iText: action.payload.noteContent.innerText,
-    iHTML: action.payload.noteContent.innerHTML
-  }),
-  [ActionTypes.NOTE.CREATE_CATEGORY]: (state: NoteState, action: any) => ({
-    ...state,
-    options: { ...state.options, [action.payload.category.id]: action.payload.category },
-    categories: { ...state.categories, [action.payload.category.id]: [] }
-  }),
+export const noteReducer = createReducer<NoteState, Action>(
+  {
+    [ActionTypes.NOTE.CHANGE_EDIT_MODE]: (state: NoteState, action: any) => ({
+      ...state,
+      editMode: !state.editMode
+    }),
+    [ActionTypes.NOTE.SAVE_NOTE_TEXT]: (state: NoteState, action: any) => ({
+      ...state,
+      categories: { ...state.categories, [action.payload.note.id]: action.payload.note }
+    }),
+    [ActionTypes.NOTE.CREATE_CATEGORY]: (state: NoteState, action: any) => ({
+      ...state,
+      options: { ...state.options, [action.payload.category.id]: action.payload.category },
+      categories: { ...state.categories, [action.payload.category.id]: [] }
+    })
+  },
   initialState
-})
+)

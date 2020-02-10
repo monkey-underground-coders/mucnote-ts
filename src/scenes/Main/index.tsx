@@ -1,8 +1,8 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-import Note from './Note'
 import NoteList from '#/components/NoteList'
 import './index.scss'
+import NoteWindow from './Note/index';
 
 interface MainSceneProps {}
 
@@ -16,7 +16,7 @@ const MainScene = (props: MainSceneProps) => {
         </div>
 
         <div className="content__note">
-          <Note />
+          <NoteWindow/>
         </div>
       </div>
     </div>

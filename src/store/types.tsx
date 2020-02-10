@@ -20,7 +20,8 @@ export type PrimaryKey = number;
 
 export interface Note {
   id: PrimaryKey;
-  content: string;
+  innerHTML: string
+  innerText: string
   title: string;
 }
 

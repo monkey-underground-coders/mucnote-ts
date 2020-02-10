@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeEditMode, saveNoteText, createCategory  } from '#/store/actions/note'
-import { NoteState } from "../../../store/types"
+import { changeEditMode, saveNoteText, createCategory } from '#/store/actions/note'
+import { Note } from '../../../store/types'
 import './index.scss'
 import { Category } from '#/store/types'
 
@@ -14,12 +14,12 @@ ypings for the module.import { saveNoteText } from './../../../store/actions/not
 const Remarkable = require('remarkable').Remarkable
 
 interface NoteProps {
-  changeEditMode: () => void,
-  createCategory: (payload: {category: Category}) => Promise<any>
-  saveNoteText: (payload: { noteContent: NoteState }) => void
+  changeEditMode: () => void
+  createCategory: (payload: { category: Category }) => Promise<any>
+  saveNoteText: (payload: { note: Note }) => void
 }
 
-const Note = (props: NoteProps) => {
+const NoteWindow = (props: NoteProps) => {
   const ref = React.useRef(null)
 
   const [innerText, setInnerText] = React.useState<string>('')
@@ -27,9 +27,7 @@ const Note = (props: NoteProps) => {
   const [previewMode, setPreviewMode] = React.useState<boolean>(false)
 
   const markdown = new Remarkable({ breaks: true })
-  const click = () => {
-    props.createCategory({category: {id: 1, title: "Test Category", description: "sample text"}})
-  }
+
   const togglePreview = () => {
     const target = ref.current as any
     if (!previewMode) {
@@ -46,10 +44,6 @@ const Note = (props: NoteProps) => {
     }
   }, [previewMode, innerHTML])
 
-  const SaveNote = () => {
-    props.saveNoteText({ noteContent: { editMode: previewMode, innerText: innerText, innerHTML: innerHTML } })
-  }
-
   return (
     <div className="create__note">
       <div className="create__note__actions">
@@ -57,7 +51,7 @@ const Note = (props: NoteProps) => {
           <span>
             <i className="fas fa-check"></i>
           </span>
-          <span className="ml-1" onClick={click}>Save</span>
+          <span className="ml-1">Save</span>
         </div>
         <div className="btn btn-primary ml-2" onClick={togglePreview}>
           <span>
@@ -70,10 +64,10 @@ const Note = (props: NoteProps) => {
       {previewMode ? (
         <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
       ) : (
-          <div className="create__note__content" contentEditable={true} ref={ref}></div>
-        )}
+        <div className="create__note__content" contentEditable={true} ref={ref}></div>
+      )}
     </div>
   )
 }
 
-export default connect(null, { changeEditMode, createCategory, saveNoteText})(Note)
+export default connect(null, { changeEditMode, createCategory, saveNoteText })(NoteWindow)

@@ -1,6 +1,6 @@
 import { ActionTypes } from '.'
 import { ThunkDispatch } from 'redux-thunk'
-import { StoreRootState, NoteState } from '../types'
+import { StoreRootState, NoteState, Note } from '../types'
 import { Action } from 'redux'
 import { Category } from './../types'
 
@@ -16,6 +16,6 @@ export const createCategory = (payload: { category: Category }) => (
     dispatch({ type: ActionTypes.NOTE.CREATE_CATEGORY, payload })
   })
 }
-export const saveNoteText = (payload: { noteContent: NoteState }) => (dispatch: ThunkDispatch<StoreRootState, any, Action>) => {
+export const saveNoteText = (payload: { note: Note }) => (dispatch: ThunkDispatch<StoreRootState, any, Action>) => {
   dispatch({ type: ActionTypes.NOTE.SAVE_NOTE_TEXT, payload })
 }

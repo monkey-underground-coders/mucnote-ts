@@ -7,5 +7,5 @@ export const rootLevelReducer = (state: StoreRootState, action: Action) => {
     note: noteReducer,
   })
 
-  return topLevelReducer(state as any, action)
+  return topLevelReducer(state as any, action as any)
 }
