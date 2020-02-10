@@ -5,6 +5,10 @@ export interface StoreRootState {
 
 export interface NoteState {
   editMode: boolean
-  iText: string
-  iHTML: string
+  innerText: string
+  innerHTML: string
+}
+
+export interface Action {
+  action: string
 }

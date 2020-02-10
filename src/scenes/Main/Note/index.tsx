@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeEditMode } from '#/store/actions/note'
-import { saveNoteText } from "#/store/actions/saveNoteText"
+import { changeEditMode, saveNoteText } from '#/store/actions/note'
 import { NoteState } from "../../../store/types"
 import './index.scss'
 
@@ -13,7 +12,7 @@ const Remarkable = require('remarkable').Remarkable
 
 interface NoteProps {
   changeEditMode: () => void,
-  saveNoteText: (payload: {NoteText: NoteState}) => void
+  saveNoteText: (payload: { noteContent: NoteState }) => void
 }
 
 const Note = (props: NoteProps) => {
@@ -42,7 +41,7 @@ const Note = (props: NoteProps) => {
   }, [previewMode, innerHTML])
 
   const SaveNote = () => {
-    props.saveNoteText({NoteText: {editMode: previewMode, iText: innerText, iHTML:innerHTML}})
+    props.saveNoteText({ noteContent: { editMode: previewMode, innerText: innerText, innerHTML: innerHTML } })
   }
 
   return (
@@ -72,4 +71,4 @@ const Note = (props: NoteProps) => {
 }
 
 
-export default connect(null, {changeEditMode, saveNoteText})(Note)
+export default connect(null, { changeEditMode, saveNoteText })(Note)
