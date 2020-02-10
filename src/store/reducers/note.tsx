@@ -3,7 +3,9 @@ import { ActionTypes } from '../actions'
 import { NoteState } from '../types'
 
 const initialState: NoteState = {
-  editMode: false
+  editMode: false,
+  iText: "",
+  iHTML: ""
 }
 
 export const noteReducer = (state: NoteState, action: Action) => ({

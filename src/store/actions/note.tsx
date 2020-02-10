@@ -5,5 +5,5 @@ import { Action } from 'redux'
 
 export const changeEditMode = () => (dispatch: ThunkDispatch<StoreRootState, any, Action>) => {
   console.log('action')
-  dispatch({ type: ActionTypes.NOTE.CHANGE_EDIT_MODE })
+  dispatch({ type: ActionTypes.NOTE.CHANGE_EDIT_MODE})
 }

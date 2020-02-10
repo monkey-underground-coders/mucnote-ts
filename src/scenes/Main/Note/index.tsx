@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { changeEditMode } from '#/store/actions/note'
+import { saveNoteText } from "#/store/actions/saveNoteText"
+import { NoteState } from "../../../store/types"
 import './index.scss'
 
 /**
@@ -10,7 +12,8 @@ import './index.scss'
 const Remarkable = require('remarkable').Remarkable
 
 interface NoteProps {
-  changeEditMode: () => void
+  changeEditMode: () => void,
+  saveNoteText: (payload: {NoteText: NoteState}) => void
 }
 
 const Note = (props: NoteProps) => {
@@ -36,7 +39,11 @@ const Note = (props: NoteProps) => {
     if (target) {
       target.innerHTML = innerHTML
     }
-  }, [previewMode])
+  }, [previewMode, innerHTML])
+
+  const SaveNote = () => {
+    props.saveNoteText({NoteText: {editMode: previewMode, iText: innerText, iHTML:innerHTML}})
+  }
 
   return (
     <div className="create__note">
@@ -58,10 +65,11 @@ const Note = (props: NoteProps) => {
       {previewMode ? (
         <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
       ) : (
-        <div className="create__note__content" contentEditable={true} ref={ref}></div>
-      )}
+          <div className="create__note__content" contentEditable={true} ref={ref}></div>
+        )}
     </div>
   )
 }
 
-export default connect(null, { changeEditMode })(Note)
+
+export default connect(null, {changeEditMode, saveNoteText})(Note)
