@@ -29,5 +29,5 @@ export interface Category {
   description: string;
 }
 
-export type NotesCategorized = Pick<Note[], PrimaryKey>
+export type NotesCategorized = Record<PrimaryKey, Note[]>
 export type CategoryOptions = Record<PrimaryKey, Category>
