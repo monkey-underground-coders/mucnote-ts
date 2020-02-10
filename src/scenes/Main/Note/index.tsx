@@ -1,16 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeEditMode } from '#/store/actions/note'
+import { changeEditMode, createCategory } from '#/store/actions/note'
 import './index.scss'
+import { Category } from '#/store/types'
 
 /**
  * I don't know any reason why this one doesn't work with ES6 import style,
- * maybe it's caused by inappropriate versions of module and typings for the module.
+ * maybe it's caused by inappropriate versions of module and timport { Category } from './../../../store/types';
+ypings for the module.
  */
 const Remarkable = require('remarkable').Remarkable
 
 interface NoteProps {
-  changeEditMode: () => void
+  changeEditMode: () => void,
+  createCategory: (payload: {category: Category}) => Promise<any>
 }
 
 const Note = (props: NoteProps) => {
@@ -21,7 +24,9 @@ const Note = (props: NoteProps) => {
   const [previewMode, setPreviewMode] = React.useState<boolean>(false)
 
   const markdown = new Remarkable({ breaks: true })
-
+  const click = () => {
+    props.createCategory({category: {id: 1, title: "Test Category", description: "sample text"}})
+  }
   const togglePreview = () => {
     const target = ref.current as any
     if (!previewMode) {
@@ -45,7 +50,7 @@ const Note = (props: NoteProps) => {
           <span>
             <i className="fas fa-check"></i>
           </span>
-          <span className="ml-1">Save</span>
+          <span className="ml-1" onClick={click}>Save</span>
         </div>
         <div className="btn btn-primary ml-2" onClick={togglePreview}>
           <span>
@@ -64,4 +69,4 @@ const Note = (props: NoteProps) => {
   )
 }
 
-export default connect(null, { changeEditMode })(Note)
+export default connect(null, { changeEditMode, createCategory })(Note)
