@@ -1,15 +1,15 @@
 import React from 'react'
 import { Category } from '#/store/types'
-
+import "./index.scss"
 interface CategoryItemProps {
   category: Category
 }
 
 const CategoryItem = (props: CategoryItemProps) => {
   return (
-    <div>
-      <div>{props.category.title}</div>
-      <div>{props.category.description}</div>
+    <div className="category__item">
+      <div className="category__item__title">{props.category.title}</div>
+      <div className="category__item__description">{props.category.description}</div>
     </div>
   )
 }
