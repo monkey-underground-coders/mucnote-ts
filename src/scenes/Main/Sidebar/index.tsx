@@ -1,8 +1,10 @@
 import React from 'react'
-import './index.scss'
 import { Link } from 'react-router-dom'
+import './index.scss'
 
-interface SidebarProps {}
+interface SidebarProps {
+  matchUrl: string
+}
 
 const Sidebar = (props: SidebarProps) => {
   const [isOpen, toggle] = React.useState<boolean>(false)
@@ -20,15 +22,15 @@ const Sidebar = (props: SidebarProps) => {
         <div className="sidebar-content">
           <div className="sidebar-content__items">
             <div className="sidebar-content__items__item">
-              <Link to="/">
+              <Link to={props.matchUrl}>
                 <span className="sidebar-content__items__item__icon">
                   <i className="fas fa-list"></i>
                 </span>
-                <span className="ml-2">Note list</span>
+                <span className="ml-2">Notes</span>
               </Link>
             </div>
             <div className="sidebar-content__items__item">
-              <Link to="#">
+              <Link to={`${props.matchUrl}/categories`}>
                 <span className="sidebar-content__items__item__icon">
                   <i className="fas fa-list"></i>
                 </span>

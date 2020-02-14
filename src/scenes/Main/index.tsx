@@ -1,26 +1,52 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-import NoteList from '#/components/NoteList'
+import { RouteComponentProps, withRouter, Redirect, Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import NoteIndex from './NoteIndex'
+import Page from '#/components/Page'
+import Categories from './Categories'
 import './index.scss'
-import NoteWindow from './Note/index';
 
-interface MainSceneProps {}
+interface MainSceneProps extends RouteComponentProps {
+  authenticated: boolean | null
+}
 
 const MainScene = (props: MainSceneProps) => {
+  const { match } = props
+
+  if (!props.authenticated) {
+    return <Redirect to="/auth"></Redirect>
+  }
+
   return (
     <div className="main">
-      <Sidebar />
-      <div className="content">
-        <div className="content__list">
-          <NoteList />
-        </div>
+      <Sidebar matchUrl={match.url} />
 
-        <div className="content__note">
-          <NoteWindow/>
-        </div>
+      <div className="layout">
+        <Switch>
+          <Route
+            path={`${match.url}`}
+            exact={true}
+            render={props => (
+              <Page title="MUCNote List">
+                <NoteIndex {...props} />
+              </Page>
+            )}
+          />
+
+          <Route
+            path={`${match.url}/categories`}
+            render={props => (
+              <Page title="MUCNote Categories">
+                <Categories {...props} />
+              </Page>
+            )}
+          />
+        </Switch>
       </div>
     </div>
   )
 }
 
-export default MainScene
+// TODO: Replace with selector
+export default withRouter(connect(() => ({ authenticated: true }))(MainScene))

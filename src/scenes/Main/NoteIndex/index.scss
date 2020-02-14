@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  height: 100%;
+
+  &__list {
+    background: #f8f8f8;
+    width: 325px;
+  }
+
+  &__note {
+    width: 100%;
+  }
+}

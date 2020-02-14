@@ -1,8 +1,9 @@
 import { Action } from '../types'
 import { ActionTypes } from '../actions'
 import { NoteState } from '../types'
-import _ from 'lodash'
 import { createReducer } from '../helpers'
+import _ from 'lodash'
+
 const initialState: NoteState = {
   editMode: false,
   categories: [],
@@ -15,10 +16,12 @@ export const noteReducer = createReducer<NoteState, Action>(
       ...state,
       editMode: !state.editMode
     }),
+
     [ActionTypes.NOTE.SAVE_NOTE_TEXT]: (state: NoteState, action: any) => ({
       ...state,
       categories: { ...state.categories, [action.payload.note.id]: action.payload.note }
     }),
+
     [ActionTypes.NOTE.CREATE_CATEGORY]: (state: NoteState, action: any) => ({
       ...state,
       options: { ...state.options, [action.payload.category.id]: action.payload.category },

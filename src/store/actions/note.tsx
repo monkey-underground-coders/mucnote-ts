@@ -16,6 +16,7 @@ export const createCategory = (payload: { category: Category }) => (
     dispatch({ type: ActionTypes.NOTE.CREATE_CATEGORY, payload })
   })
 }
+
 export const saveNoteText = (payload: { note: Note }) => (dispatch: ThunkDispatch<StoreRootState, any, Action>) => {
   dispatch({ type: ActionTypes.NOTE.SAVE_NOTE_TEXT, payload })
 }

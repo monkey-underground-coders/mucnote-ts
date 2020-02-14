@@ -74,12 +74,12 @@ $sidebar-gutters: 1rem;
   }
 }
 
-.sidebar + .content {
+.sidebar + .layout {
   transition: 0.3s linear;
   margin-left: $sidebar-width;
 }
 
-.sidebar.sidebar__hidden + .content {
+.sidebar.sidebar__hidden + .layout {
   margin-left: calc(#{$sidebar-gutters} * 3);
 }
 

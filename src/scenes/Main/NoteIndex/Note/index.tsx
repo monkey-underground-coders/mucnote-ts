@@ -1,16 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { changeEditMode, saveNoteText, createCategory } from '#/store/actions/note'
-import { Note } from '../../../store/types'
+import { Category, Note} from '#/store/types'
 import './index.scss'
-import { Category } from '#/store/types'
 
-/**
- * I don't know any reason why this one doesn't work with ES6 import style,
- * maybe it's caused by inappropriate versions of module and timport { Category } from './../../../store/types';
-ypings for the module.import { saveNoteText } from './../../../store/actions/note';
-
- */
 const Remarkable = require('remarkable').Remarkable
 
 interface NoteProps {
