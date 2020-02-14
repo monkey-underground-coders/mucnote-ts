@@ -14,6 +14,7 @@ export interface NoteState {
   editMode: boolean
   categories: NotesCategorized,
   options: CategoryOptions
+  selectedCategory: Category | null
 }
 
 export type PrimaryKey = number;

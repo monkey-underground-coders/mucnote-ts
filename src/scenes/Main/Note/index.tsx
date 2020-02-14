@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { changeEditMode, saveNoteText, createCategory } from '#/store/actions/note'
-import { Note } from '../../../store/types'
+import { Note, StoreRootState } from '../../../store/types'
 import './index.scss'
 import { Category } from '#/store/types'
+import store from '#/store'
 
 /**
  * I don't know any reason why this one doesn't work with ES6 import style,
@@ -64,10 +65,10 @@ const NoteWindow = (props: NoteProps) => {
       {previewMode ? (
         <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
       ) : (
-        <div className="create__note__content" contentEditable={true} ref={ref}></div>
-      )}
+          <div className="create__note__content" contentEditable={true} ref={ref}></div>
+        )}
     </div>
   )
 }
 
-export default connect(null, { changeEditMode, createCategory, saveNoteText })(NoteWindow)
+export default connect((store: StoreRootState) => { selectedCategory: store.note.selectedCategory }, { changeEditMode, createCategory, saveNoteText })(NoteWindow)

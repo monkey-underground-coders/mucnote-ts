@@ -1,11 +1,28 @@
 import React from 'react'
 import NoteListItem from '../NoteListItem'
 import './index.scss'
+import { connect } from 'react-redux'
+import { StoreRootState, NoteState } from '../../store/types'
+import { Category } from '#/store/types'
 
-const temporaryLocalData = [...new Array(10).keys()].map(k => ({ title: `Note ${k}` }))
 
-const NoteList = () => {
-  const _renderedNotes = React.useMemo(() => temporaryLocalData.map(t => <NoteListItem data={t} />), temporaryLocalData)
+interface NoteListProps {
+  selectedCategory: Category | null
+  Notes: NoteState
+}
+
+
+const NoteList = (props: NoteListProps) => {
+  const notesMapper = (data: any) => <NoteListItem data={data} />
+
+  const temporaryLocalData = Object.keys({})
+
+  const _renderedNotes = React.useMemo(() => {
+    if (props.selectedCategory != null) {
+      return temporaryLocalData.filter(word => word).map(notesMapper)
+    }
+    return temporaryLocalData.map(notesMapper)
+  }, [temporaryLocalData, props.selectedCategory])
 
   const _renderedNoteActionsTitle = React.useMemo(() => {
     const len = _renderedNotes.length
@@ -26,4 +43,4 @@ const NoteList = () => {
   )
 }
 
-export default NoteList
+export default connect((store: StoreRootState) => ({ selectedCategory: store.note.selectedCategory, Notes: store.note.categories }), ({}))(NoteList)

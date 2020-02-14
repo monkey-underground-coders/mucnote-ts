@@ -6,8 +6,16 @@ import _ from 'lodash'
 
 const initialState: NoteState = {
   editMode: false,
-  categories: [],
-  options: []
+  categories: {
+    "0": [{ id: 0, innerHTML: "", innerText: "", title: "Lorem Isprum0" }],
+    "1": [{ id: 1, innerHTML: "", innerText: "", title: "Lorem Isprum1" }]
+  },
+  options: {
+    "0": { id: 0, title: "Fruits", description: "Some tasty food" },
+    "1": { id: 1, title: "Vegetables", description: "Some tasty food" },
+    "2": { id: 2, title: "Other", description: "Some tasty food" }
+  },
+  selectedCategory: null
 }
 
 export const noteReducer = createReducer<NoteState, Action>(
@@ -26,6 +34,11 @@ export const noteReducer = createReducer<NoteState, Action>(
       ...state,
       options: { ...state.options, [action.payload.category.id]: action.payload.category },
       categories: { ...state.categories, [action.payload.category.id]: [] }
+    }),
+
+    [ActionTypes.NOTE.SET_SELECTED_CATEGORY]: (state: NoteState, action: any) => ({
+      ...state,
+      selectedCategory: action.payload.selectCategory
     })
   },
   initialState

@@ -1,19 +1,25 @@
 import React from 'react'
 import CategoryItem from '../CategoryItem'
-import { Category } from '#/store/types'
+import { CategoryOptions } from '#/store/types'
 import "./index.scss"
-const temporaryLocalData = [...new Array(10).keys()].map(k => ({
-  title: `Category ${k}`,
-  description: 'Default description',
-  id: k
-}))
+import { connect } from 'react-redux'
+import { StoreRootState } from '../../../../store/types'
 
-const CategoryList = () => {
-  const [currentCategory, setCurrentCategory] = React.useState<string>('')
-  const categoriesToRender = temporaryLocalData.map(e => (
-      <CategoryItem category={e} />
-  ))
-  return <div className = "categories">{categoriesToRender}</div>
+interface CategoryListProps {
+  options: CategoryOptions
 }
 
-export default CategoryList
+const CategoryList = (props: CategoryListProps) => {
+  const [currentCategory, setCurrentCategory] = React.useState<string>('')
+
+  const categoriesToRender = React.useMemo(() => Object.keys(props.options).map((categoryId: any) => {
+    const categoryInfo = props.options[categoryId]
+    return <CategoryItem category={categoryInfo} />
+  }), [props.options])
+
+  return <div className="categories">
+    {categoriesToRender}
+  </div>
+}
+
+export default connect((store: StoreRootState) => ({ options: store.note.options }))(CategoryList)
