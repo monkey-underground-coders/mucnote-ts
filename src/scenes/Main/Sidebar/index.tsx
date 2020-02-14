@@ -20,11 +20,11 @@ const Sidebar = (props: SidebarProps) => {
         <div className="sidebar-content">
           <div className="sidebar-content__items">
             <div className="sidebar-content__items__item">
-              <Link to="#">
+              <Link to="/">
                 <span className="sidebar-content__items__item__icon">
                   <i className="fas fa-list"></i>
                 </span>
-                <span className="ml-2">List</span>
+                <span className="ml-2">Note list</span>
               </Link>
             </div>
             <div className="sidebar-content__items__item">
@@ -32,7 +32,7 @@ const Sidebar = (props: SidebarProps) => {
                 <span className="sidebar-content__items__item__icon">
                   <i className="fas fa-list"></i>
                 </span>
-                <span className="ml-2">List</span>
+                <span className="ml-2">Categories</span>
               </Link>
             </div>
             <div className="sidebar-content__items__item">
