@@ -1,18 +1,17 @@
 import React from 'react'
 import { getShortString } from '#/utils'
+import { Note } from '#/store/types'
 import './index.scss'
 
 interface NoteListItemProps {
-  data: {
-    title: string
-  }
+  note: Note
 }
 
 const NoteListItem = (props: NoteListItemProps) => {
   return (
     <div className="notelist__item">
       <div className="notelist__item__inner">
-        <div className="notelist__item-title">{props.data.title}</div>
+        <div className="notelist__item-title">{props.note.title}</div>
         <div className="notelist__item-description">
           {getShortString(
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium eveniet dolorum ab exercitationem hic quoasdadadaxzloremsmdap'

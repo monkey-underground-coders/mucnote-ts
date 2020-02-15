@@ -7,13 +7,14 @@ import _ from 'lodash'
 const initialState: NoteState = {
   editMode: false,
   categories: {
-    "0": [{ id: 0, innerHTML: "", innerText: "", title: "Lorem Isprum0" }],
-    "1": [{ id: 1, innerHTML: "", innerText: "", title: "Lorem Isprum1" }]
+    '0': [{ id: 0, innerHTML: '', innerText: '', title: 'Lorem Isprum0' }],
+    '1': [{ id: 1, innerHTML: '', innerText: '', title: 'Lorem Isprum1' }],
+    '2': [{ id: 2, innerHTML: '', innerText: '', title: 'Lorem Ipsum2' }]
   },
   options: {
-    "0": { id: 0, title: "Fruits", description: "Some tasty food" },
-    "1": { id: 1, title: "Vegetables", description: "Some tasty food" },
-    "2": { id: 2, title: "Other", description: "Some tasty food" }
+    '0': { id: 0, title: 'Fruits', description: 'Some tasty food' },
+    '1': { id: 1, title: 'Vegetables', description: 'Some tasty food' },
+    '2': { id: 2, title: 'Other', description: 'Some tasty food' }
   },
   selectedCategory: null
 }

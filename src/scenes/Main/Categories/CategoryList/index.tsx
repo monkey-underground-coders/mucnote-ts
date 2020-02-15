@@ -1,25 +1,40 @@
 import React from 'react'
 import CategoryItem from '../CategoryItem'
-import { CategoryOptions } from '#/store/types'
-import "./index.scss"
+import { CategoryOptions, StoreRootState, PrimaryKey } from '#/store/types'
 import { connect } from 'react-redux'
-import { StoreRootState } from '../../../../store/types'
+import './index.scss'
 
 interface CategoryListProps {
   options: CategoryOptions
 }
 
 const CategoryList = (props: CategoryListProps) => {
-  const [currentCategory, setCurrentCategory] = React.useState<string>('')
+  const renderedCategories = React.useMemo(
+    () => Object.keys(props.options).map(categoryId => <CategoryItem category={props.options[categoryId]} />),
+    [props.options]
+  )
 
-  const categoriesToRender = React.useMemo(() => Object.keys(props.options).map((categoryId: any) => {
-    const categoryInfo = props.options[categoryId]
-    return <CategoryItem category={categoryInfo} />
-  }), [props.options])
+  return (
+    <div className="categories">
+      <div className="categories__header">
+        <h5>Categories</h5>
 
-  return <div className="categories">
-    {categoriesToRender}
-  </div>
+        <div>
+          <input type="text" className="form-control" placeholder="Find categories..." />
+        </div>
+      </div>
+
+      <div className="categories__postheader">
+        <h6>My categories list</h6>
+
+        <div>
+          <button className="btn btn-success-borderless">New category</button>
+        </div>
+      </div>
+
+      <div className="categories__content">{renderedCategories}</div>
+    </div>
+  )
 }
 
 export default connect((store: StoreRootState) => ({ options: store.note.options }))(CategoryList)

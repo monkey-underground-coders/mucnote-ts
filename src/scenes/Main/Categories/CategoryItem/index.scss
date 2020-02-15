@@ -1,19 +1,23 @@
 .category {
-  &__item{
-    padding: 0.75rem 1.25rem;
-    justify-content: space-between;
+  &__item {
     display: flex;
+    justify-content: space-between;
     width: 100%;
-    border: 1px black solid;
-    border-left: 0px white;
-    &:hover{
-      background-color: gray;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px hsl(0, 0%, 78%) solid;
+    transition: 0.2s;
+    cursor: pointer;
+
+    &:nth-child(2n) {
+      background: #f8f8f8;
     }
-    &__title{
+
+    &:hover {
+      background-color: #f2f2f2;
+    }
+
+    &__title {
       font-weight: bold;
     }
-
   }
-
-
 }

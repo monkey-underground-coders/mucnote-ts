@@ -1,15 +1,18 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
+import CategoryList from './CategoryList/'
+import AnimatedPageTransition from '#/components/AnimatedPageTransition'
 import './index.scss'
-import CategoryList from './CategoryList/';
 
 interface CategoriesProps extends RouteComponentProps {}
 
 const Categories = (props: CategoriesProps) => {
   return (
-    <div className="content">
-      <CategoryList />
-    </div>
+    <AnimatedPageTransition>
+      <div className="categories-content">
+        <CategoryList />
+      </div>
+    </AnimatedPageTransition>
   )
 }
 

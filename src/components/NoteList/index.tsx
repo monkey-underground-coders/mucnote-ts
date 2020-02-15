@@ -1,28 +1,29 @@
 import React from 'react'
 import NoteListItem from '../NoteListItem'
-import './index.scss'
 import { connect } from 'react-redux'
-import { StoreRootState, NoteState } from '../../store/types'
+import { StoreRootState, NotesCategorized, Note } from '#/store/types'
 import { Category } from '#/store/types'
-
+import _ from 'lodash'
+import './index.scss'
 
 interface NoteListProps {
   selectedCategory: Category | null
-  Notes: NoteState
+  categories: NotesCategorized
 }
 
-
 const NoteList = (props: NoteListProps) => {
-  const notesMapper = (data: any) => <NoteListItem data={data} />
+  const { categories, selectedCategory } = props
 
-  const temporaryLocalData = Object.keys({})
-
-  const _renderedNotes = React.useMemo(() => {
-    if (props.selectedCategory != null) {
-      return temporaryLocalData.filter(word => word).map(notesMapper)
+  const notesContainer = React.useMemo(() => {
+    if (selectedCategory) {
+      return categories[selectedCategory.id]
     }
-    return temporaryLocalData.map(notesMapper)
-  }, [temporaryLocalData, props.selectedCategory])
+    return _.flatten(Object.values(categories))
+  }, [categories, selectedCategory])
+
+  const _renderedNotes = React.useMemo(() => notesContainer.map((note: Note) => <NoteListItem note={note} />), [
+    notesContainer
+  ])
 
   const _renderedNoteActionsTitle = React.useMemo(() => {
     const len = _renderedNotes.length
@@ -43,4 +44,7 @@ const NoteList = (props: NoteListProps) => {
   )
 }
 
-export default connect((store: StoreRootState) => ({ selectedCategory: store.note.selectedCategory, Notes: store.note.categories }), ({}))(NoteList)
+export default connect(
+  (store: StoreRootState) => ({ selectedCategory: store.note.selectedCategory, categories: store.note.categories }),
+  {}
+)(NoteList)
