@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeEditMode, saveNoteText, createCategory } from '#/store/actions/note'
-import { Category, Note} from '#/store/types'
+import { changeEditMode, saveNoteText, createCategory, createNote } from '#/store/actions/note'
+import { Category, Note } from '#/store/types'
 import './index.scss'
 
 const Remarkable = require('remarkable').Remarkable
@@ -10,9 +10,11 @@ interface NoteProps {
   changeEditMode: () => void
   createCategory: (payload: { category: Category }) => Promise<any>
   saveNoteText: (payload: { note: Note }) => void
+  createNote: (payload: { Note: Note }) => void
 }
 
 const NoteWindow = (props: NoteProps) => {
+  const { changeEditMode, createNote, createCategory, saveNoteText } = props
   const ref = React.useRef(null)
 
   const [innerText, setInnerText] = React.useState<string>('')
@@ -30,6 +32,14 @@ const NoteWindow = (props: NoteProps) => {
     setPreviewMode(!previewMode)
   }
 
+  const onCreateNote = () => {
+    const target = ref.current as any
+    const { _innerText, _innerHTML } = target
+    setInnerText(_innerText)
+    setInnerHTML(_innerHTML)
+    createNote({ Note: { id: new Date().getTime(), innerHTML: _innerHTML, innerText: _innerText, title: innerText } })
+  }
+
   React.useLayoutEffect(() => {
     const target = ref.current as any
     if (target) {
@@ -40,7 +50,7 @@ const NoteWindow = (props: NoteProps) => {
   return (
     <div className="create__note">
       <div className="create__note__actions">
-        <div className="btn btn-success">
+        <div className="btn btn-success" onClick={onCreateNote}>
           <span>
             <i className="fas fa-check"></i>
           </span>
@@ -57,10 +67,10 @@ const NoteWindow = (props: NoteProps) => {
       {previewMode ? (
         <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
       ) : (
-        <div className="create__note__content" contentEditable={true} ref={ref}></div>
-      )}
+          <div className="create__note__content" contentEditable={true} ref={ref}></div>
+        )}
     </div>
   )
 }
 
-export default connect(null, { changeEditMode, createCategory, saveNoteText })(NoteWindow)
+export default connect(null, { changeEditMode, createCategory, saveNoteText, createNote })(NoteWindow)

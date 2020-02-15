@@ -40,6 +40,11 @@ export const noteReducer = createReducer<NoteState, Action>(
     [ActionTypes.NOTE.SET_SELECTED_CATEGORY]: (state: NoteState, action: any) => ({
       ...state,
       selectedCategory: action.payload.selectCategory
+    }),
+
+    [ActionTypes.NOTE.CREATE_NOTE]: (state: NoteState, action: any) => ({
+      ...state,
+      categories: { ...state.categories, [state.selectedCategory!.id]: [...state.categories[state.selectedCategory!.id], action.payload.Note], }
     })
   },
   initialState

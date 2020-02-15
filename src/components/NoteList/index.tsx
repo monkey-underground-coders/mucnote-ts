@@ -3,6 +3,7 @@ import NoteListItem from '../NoteListItem'
 import { connect } from 'react-redux'
 import { StoreRootState, NotesCategorized, Note } from '#/store/types'
 import { Category } from '#/store/types'
+import { createNote } from '#/store/actions/note'
 import _ from 'lodash'
 import './index.scss'
 
@@ -45,6 +46,5 @@ const NoteList = (props: NoteListProps) => {
 }
 
 export default connect(
-  (store: StoreRootState) => ({ selectedCategory: store.note.selectedCategory, categories: store.note.categories }),
-  {}
+  (store: StoreRootState) => ({ selectedCategory: store.note.selectedCategory, categories: store.note.categories }), {}
 )(NoteList)
