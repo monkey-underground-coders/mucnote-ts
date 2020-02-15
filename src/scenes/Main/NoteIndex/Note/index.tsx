@@ -14,7 +14,7 @@ interface NoteProps {
 }
 
 const NoteWindow = (props: NoteProps) => {
-  const { changeEditMode, createNote, createCategory, saveNoteText } = props
+  const { createNote } = props
   const ref = React.useRef(null)
 
   const [innerText, setInnerText] = React.useState<string>('')
@@ -34,10 +34,9 @@ const NoteWindow = (props: NoteProps) => {
 
   const onCreateNote = () => {
     const target = ref.current as any
-    const { _innerText, _innerHTML } = target
-    setInnerText(_innerText)
-    setInnerHTML(_innerHTML)
-    createNote({ Note: { id: new Date().getTime(), innerHTML: _innerHTML, innerText: _innerText, title: innerText } })
+    createNote({
+      Note: { id: new Date().getTime(), innerHTML: target.innerHTML, innerText: target.innerText, title: 'asdfg' }
+    })
   }
 
   React.useLayoutEffect(() => {
@@ -67,8 +66,8 @@ const NoteWindow = (props: NoteProps) => {
       {previewMode ? (
         <div className="create__note__content" dangerouslySetInnerHTML={{ __html: markdown.render(innerText) }}></div>
       ) : (
-          <div className="create__note__content" contentEditable={true} ref={ref}></div>
-        )}
+        <div className="create__note__content" contentEditable={true} ref={ref}></div>
+      )}
     </div>
   )
 }
